@@ -40,7 +40,7 @@ public class TwoSum {
         if(carry>0)
         	result.add(carry);
         
-        System.out.print(result+" ");
+        System.out.println(result);
         
     }
 }
