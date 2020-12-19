@@ -1,6 +1,6 @@
 package leetcode.learning;
 
-public class SumRecursive {
+public class SumNumbersRecursive {
 
 	public static void main(String[] args) {
 		
