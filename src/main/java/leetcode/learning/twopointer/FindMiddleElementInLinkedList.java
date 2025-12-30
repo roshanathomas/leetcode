@@ -113,7 +113,20 @@ public class FindMiddleElementInLinkedList {
         ListNode mid = solver.middleNode(head);
         System.out.println(mid.val);
 
-        ListNode cycleHead = build(3,2,0,-4,3);
+        // Build 3 -> 2 -> 0 -> -4 and connect tail to node with value 2
+        ListNode n1 = new ListNode(3);
+        ListNode n2 = new ListNode(2);
+        ListNode n3 = new ListNode(0);
+        ListNode n4 = new ListNode(-4);
+
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n2; // cycle here
+
+        ListNode head1 = n1;       // head of the list
+        ListNode cycleHead = n2;  // start of the cycle
+
         System.out.println(solver.hasCycle(cycleHead));
 
         ListNode cycleEntry = solver.detectCycle(cycleHead);
