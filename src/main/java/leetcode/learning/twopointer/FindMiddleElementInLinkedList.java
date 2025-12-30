@@ -1,0 +1,94 @@
+package leetcode.learning.twopointer;
+
+//Definition for singly-linked list.
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode() {
+    }
+
+    ListNode(int val) {
+        this.val = val;
+    }
+
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+public class FindMiddleElementInLinkedList {
+
+    public ListNode middleNode(ListNode head) {
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+
+    }
+
+    public boolean hasCycle(ListNode head) {
+    
+    ListNode slow = head, fast = head;
+
+    while (fast != null && fast.next != null) {
+        slow = slow.next;          // 1 step
+        fast = fast.next.next;     // 2 steps
+        if (slow == fast) return true;
+    }
+    return false;
+        
+    }
+
+    public ListNode removeNthFromEnd(ListNode head,int n) {
+
+        ListNode dummy = new ListNode(0, head);
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+
+        for(int i = 0 ;i<=n;i++) {
+            fast = fast.next;
+        }
+
+        while(fast !=null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+
+        return dummy.next;
+
+
+    }
+
+    static ListNode build(int... vals) {
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+        for (int v : vals) {
+            curr.next = new ListNode(v);
+            curr = curr.next;
+        }
+        return dummy.next;
+    }
+
+    public static void main(String[] args) {
+
+        FindMiddleElementInLinkedList solver = new FindMiddleElementInLinkedList();
+        ListNode head = build(1, 2, 3, 4, 5);
+        ListNode mid = solver.middleNode(head);
+        System.out.println(mid.val);
+
+        ListNode cycleHead = build(3,2,0,-4);
+        System.out.println(solver.hasCycle(cycleHead));
+
+    }
+
+}
