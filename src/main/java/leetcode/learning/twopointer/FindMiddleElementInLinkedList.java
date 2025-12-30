@@ -47,6 +47,33 @@ public class FindMiddleElementInLinkedList {
         
     }
 
+    public ListNode detectCycle(ListNode head) {
+
+        if(head == null || head.next == null)
+            return null;
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if(slow == fast){
+                ListNode entry = head;
+
+                while(entry !=slow){
+                    entry = entry.next;
+                    slow = slow.next;
+                }
+                return entry;
+            }
+        }
+
+        return null;
+
+    }
+
     public ListNode removeNthFromEnd(ListNode head,int n) {
 
         ListNode dummy = new ListNode(0, head);
@@ -86,8 +113,11 @@ public class FindMiddleElementInLinkedList {
         ListNode mid = solver.middleNode(head);
         System.out.println(mid.val);
 
-        ListNode cycleHead = build(3,2,0,-4);
+        ListNode cycleHead = build(3,2,0,-4,3);
         System.out.println(solver.hasCycle(cycleHead));
+
+        ListNode cycleEntry = solver.detectCycle(cycleHead);
+        System.out.println(cycleEntry.val);
 
     }
 
