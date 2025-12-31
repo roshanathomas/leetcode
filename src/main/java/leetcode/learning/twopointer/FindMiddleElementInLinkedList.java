@@ -96,6 +96,21 @@ public class FindMiddleElementInLinkedList {
 
     }
 
+    public ListNode reverse(ListNode head) {
+
+        ListNode newHead = null;
+        while(head != null){
+
+            ListNode next = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = next;
+        }
+
+        return newHead;
+    }
+
+
     static ListNode build(int... vals) {
         ListNode dummy = new ListNode(0);
         ListNode curr = dummy;
@@ -104,6 +119,18 @@ public class FindMiddleElementInLinkedList {
             curr = curr.next;
         }
         return dummy.next;
+    }
+
+    static void printList(ListNode head) {
+        ListNode curr = head;
+        while (curr != null) {
+            System.out.print(curr.val);
+            if (curr.next != null) {
+                System.out.print(" -> ");
+            }
+            curr = curr.next;
+        }
+        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -131,6 +158,16 @@ public class FindMiddleElementInLinkedList {
 
         ListNode cycleEntry = solver.detectCycle(cycleHead);
         System.out.println(cycleEntry.val);
+
+
+        ListNode head2 = build(1, 2, 3, 4, 5);
+        ListNode outputAfterRemoval = solver.removeNthFromEnd(head2, 2);
+        System.out.print("List after removal: ");
+        printList(outputAfterRemoval);
+
+        ListNode head3 = build(1, 2, 3, 4, 5);
+        System.out.print("List after reversal: ");
+        printList(solver.reverse(head3));
 
     }
 
